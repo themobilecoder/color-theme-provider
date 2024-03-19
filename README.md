@@ -29,7 +29,7 @@ dependencies:
 
 ### Defining your own theme
 
-To make your own theme, create a class that extends the `ColorTheme` abstract class and define the properties that you require. 
+To make your own theme, create a class that extends the `ColorTheme` abstract class and define your required properties. 
 
 For example:
 
@@ -68,7 +68,7 @@ final darkTheme = MyTheme(
 
 ### Accessing your theme through `ColorThemeProvider`
 
-The `ColorThemeProvider` uses an `InheritedNotifier` under the hood. This means that your custom theme can be accessed as long as your widgets has the same scope as the theme provider.
+The `ColorThemeProvider` uses an `InheritedNotifier` under the hood. This means your custom theme can be accessed if your widgets have the same scope as the theme provider.
 
 ```dart
 ColorThemeProvider(

@@ -1,14 +1,16 @@
 # Color Theme Provider
 
-Use your own theme without relying on `Material Design` or `Cupertino` design tokens.
+Use your custom theme **without** relying on `Material Design` or `Cupertino` design tokens.
 
 The `ColorThemeProvider` package lets you define your own color scheme according to your app's needs.
 
 ## Features
-- Define your own color properties
-- Automatically uses the `theme` when device is in light mode
-- Uses the `darkTheme` when device is in dark mode
-- Properly scoped and is accessible within the widget tree
+- Define your own color properties. No need to depend on Google's `ColorScheme` or Apple's `CupertinoThemeData`
+- Automatically uses the `theme` parameter when the device is in light mode
+- Uses the `darkTheme` parameter when the device is in dark mode
+- Properly scoped and accessible within the widget tree
+
+![image caption](screenshots/example-screenshot.png)
 
 ## Usage
 
@@ -65,11 +67,11 @@ ColorThemeProvider(
 
 ### Using the theme
 
-If your widgets are under the `ColorThemeProvider` widget tree, then you can access your theme through the `context`.
+If your widgets are under the `ColorThemeProvider` widget tree, you can access your theme through the `context`.
 
 ```dart
 final theme = context.theme<MyTheme>();
-//Access the properties of your custome theme
+//Access the properties of your custom theme
 theme.mainColor;
 theme.backgroundColor;
 theme.textColor;

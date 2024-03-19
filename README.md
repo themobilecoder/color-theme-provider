@@ -14,6 +14,19 @@ The `ColorThemeProvider` package lets you define your own color scheme according
 
 ## Usage
 
+### Import it
+
+Add the package to your `pubspec.yaml`
+
+```yaml
+dependencies:
+  
+  color_theme_provider:
+    git: https://github.com/themobilecoder/color-theme-provider
+    ref: 1.0.0
+```
+
+
 ### Defining your own theme
 
 To make your own theme, create a class that extends the `ColorTheme` abstract class and define the properties that you require. 

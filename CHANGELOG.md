@@ -1,3 +1,5 @@
-## 0.0.1
+## 1.0.0
 
-* TODO: Describe initial release.
+* Add `ColorThemeProvider` to initialize the theme
+* Use `context.theme<T>()` to get theme of type `ColorTheme`
+* Use `context.themeManager<T>()` to get theme manager of type `ColorTheme`

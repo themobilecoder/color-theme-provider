@@ -1,6 +1,6 @@
 name: color_theme_provider
-description: "A new Flutter package project."
-version: 0.0.1
+description: "Customized color theme for your app"
+version: 1.0.0
 homepage:
 
 environment:

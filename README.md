@@ -22,8 +22,9 @@ Add the package to your `pubspec.yaml`
 dependencies:
   
   color_theme_provider:
-    git: https://github.com/themobilecoder/color-theme-provider
-    ref: 1.0.0
+    git:
+      url: https://github.com/themobilecoder/color-theme-provider
+      ref: 1.0.0
 ```
 
 

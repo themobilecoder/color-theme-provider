@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Update readme
+
 ## 1.1.0
 
 **BREAKING CHANGE**

@@ -15,6 +15,13 @@ interface class ColorThemeManager<T extends ColorTheme> {
   /// using [setTheme] will not do anything until your device is switched
   /// to light mode.
   void setDarkTheme(T theme) {}
+
+  /// Gets the current brightness of the platform whether it's light or dark mode.
+  /// Returns either [Brightness.light] or [Brightness.dark] to match whether device
+  /// is in normal or dark mode respectively.
+  Brightness getCurrentMode() {
+    throw Exception('Should be implemented');
+  }
 }
 
 /// Theme class used with [ColorThemeProvider].
@@ -74,7 +81,7 @@ class ColorThemeProvider<T extends ColorTheme>
     return oldWidget.theme != theme || oldWidget.darkTheme != darkTheme;
   }
 
-  static T _themeOf<T extends ColorTheme>(BuildContext context) {
+  static T _colorThemeOf<T extends ColorTheme>(BuildContext context) {
     final T? result = _maybeThemeOf<T>(context);
     assert(result != null, 'No ColorTheme found!');
     return result!;
@@ -105,14 +112,20 @@ class ColorThemeProvider<T extends ColorTheme>
       return false;
     }
   }
+
+  @override
+  Brightness getCurrentMode() {
+    WidgetsFlutterBinding.ensureInitialized();
+    return WidgetsBinding.instance.platformDispatcher.platformBrightness;
+  }
 }
 
 extension ColorThemeProviderUtils on BuildContext {
   /// Obtain a [ColorTheme] from the closest parent in the widget tree.
   /// This throws an [AssertionError] if there is no [ColorThemeProvider]
   /// parent of type [T] in the widget tree.
-  T theme<T extends ColorTheme>() {
-    return ColorThemeProvider._themeOf<T>(this);
+  T colorTheme<T extends ColorTheme>() {
+    return ColorThemeProvider._colorThemeOf<T>(this);
   }
 
   /// Obtain a [ColorThemeManager] from the closest parent in the widget tree.

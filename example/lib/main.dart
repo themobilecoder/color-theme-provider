@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     ColorThemeProvider(
-      theme: lightTheme,
-      darkTheme: darkTheme,
+      theme: LightMyTheme(),
+      darkTheme: DarkMyTheme(),
       child: const MyApp(),
     ),
   );
@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.theme<MyTheme>();
+    final theme = context.colorTheme<MyTheme>();
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       body: Padding(
@@ -119,4 +119,18 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void changeTheme(BuildContext context, MyTheme newTheme) {
+  final colorThemeManager = context.colorThemeManager<MyTheme>();
+
+  /// Update current light theme
+  colorThemeManager.setTheme(newTheme);
+
+  /// Update current dark theme
+  colorThemeManager.setDarkTheme(newTheme);
+
+  /// Check whether app is in light or darkmode
+  /// [Brightness.dark] for dark mode and [Brightness.light] for light mode;
+  colorThemeManager.getCurrentMode();
 }

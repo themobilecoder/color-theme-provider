@@ -1,6 +1,6 @@
 name: color_theme_provider
 description: "Customized color theme for your app"
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/themobilecoder/color-theme-provider
 
 environment:

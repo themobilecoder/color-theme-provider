@@ -24,13 +24,13 @@ dependencies:
   color_theme_provider:
     git:
       url: https://github.com/themobilecoder/color-theme-provider
-      ref: 1.0.0
+      ref: 1.1.0
 ```
 
 
 ### Defining your own theme
 
-To make your own theme, create a class that extends the `ColorTheme` abstract class and define your required properties. 
+To make your own theme, create a base class that extends or implements the `ColorTheme` abstract class and define your required properties.
 
 For example:
 
@@ -38,33 +38,40 @@ For example:
 import 'package:color_theme_provider/color_theme_provider.dart';
 import 'package:flutter/material.dart';
 
-class MyTheme extends ColorTheme {
-  MyTheme({
-    required this.mainColor,
-    required this.containerColor,
-    required this.backgroundColor,
-    required this.textColor,
-  });
-
-  final Color mainColor;
-  final Color containerColor;
-  final Color backgroundColor;
-  final Color textColor;
+abstract class MyTheme implements ColorTheme {
+  Color get mainColor;
+  Color get containerColor;
+  Color get backgroundColor;
+  Color get textColor;
 }
 
-final lightTheme = MyTheme(
-  mainColor: const Color(0xFF7BD3EA),
-  containerColor: const Color(0xFFA1EEBD),
-  backgroundColor: const Color(0xFFFCFCFC),
-  textColor: Colors.black,
-);
+final class LightMyTheme implements MyTheme {
+  @override
+  final Color mainColor = const Color(0xFF7BD3EA);
 
-final darkTheme = MyTheme(
-  mainColor: const Color(0xFF7BD3EA),
-  containerColor: const Color(0xFF007F73),
-  backgroundColor: const Color(0xFF2C2C2C),
-  textColor: Colors.white,
-);
+  @override
+  final Color containerColor = const Color(0xFFA1EEBD);
+
+  @override
+  final Color backgroundColor = const Color(0xFFFCFCFC);
+
+  @override
+  final Color textColor = Colors.black;
+}
+
+final class DarkMyTheme implements MyTheme {
+  @override
+  final Color mainColor = const Color(0xFF7BD3EA);
+
+  @override
+  final Color containerColor = const Color(0xFF007F73);
+
+  @override
+  final Color backgroundColor = const Color(0xFF2C2C2C);
+
+  @override
+  final Color textColor = Colors.white;
+}
 ```
 
 ### Accessing your theme through `ColorThemeProvider`
@@ -73,20 +80,46 @@ The `ColorThemeProvider` uses an `InheritedNotifier` under the hood. This means 
 
 ```dart
 ColorThemeProvider(
-    theme: lightTheme,
-    darkTheme: darkTheme,
+    theme: LightMyTheme,
+    darkTheme: DarkMyTheme(),
     child: const MyApp(),
 ),
 ```
 
-### Using the theme
+### Using the color theme
 
-If your widgets are under the `ColorThemeProvider` widget tree, you can access your theme through the `context`.
+If your widgets are under the `ColorThemeProvider` widget tree, you can access your theme through the `context`. You can get the nearest `ColorTheme` using the `BuildContext`'s extension function `colorTheme<T>`.
 
 ```dart
-final theme = context.theme<MyTheme>();
+final theme = context.colorTheme<MyTheme>();
 //Access the properties of your custom theme
 theme.mainColor;
 theme.backgroundColor;
 theme.textColor;
+```
+
+### Setting the color theme dynamically
+
+It is possible to change the theme used for light or darkmode while running the app through the `ColorThemeManager`. Obtain this instance using the `BuildContext`.
+
+```dart
+  final colorThemeManager = context.colorThemeManager<MyTheme>();
+
+  /// Update current light theme
+  colorThemeManager.setTheme(newTheme);
+
+  /// Update current dark theme
+  colorThemeManager.setDarkTheme(newTheme);
+```
+
+### Checking if platform is in dark mode
+
+Use the `ColorThemeManager` to check whether the platform is in dark mode or not.
+
+```dart
+  final colorThemeManager = context.colorThemeManager<MyTheme>();
+
+  /// Check whether app is in light or darkmode
+  /// [Brightness.dark] for dark mode and [Brightness.light] for light mode;
+  colorThemeManager.getCurrentMode();
 ```

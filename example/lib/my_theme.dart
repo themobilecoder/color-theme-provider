@@ -1,30 +1,37 @@
 import 'package:color_theme_provider/color_theme_provider.dart';
 import 'package:flutter/material.dart';
 
-class MyTheme extends ColorTheme {
-  MyTheme({
-    required this.mainColor,
-    required this.containerColor,
-    required this.backgroundColor,
-    required this.textColor,
-  });
-
-  final Color mainColor;
-  final Color containerColor;
-  final Color backgroundColor;
-  final Color textColor;
+abstract class MyTheme implements ColorTheme {
+  Color get mainColor;
+  Color get containerColor;
+  Color get backgroundColor;
+  Color get textColor;
 }
 
-final lightTheme = MyTheme(
-  mainColor: const Color(0xFF7BD3EA),
-  containerColor: const Color(0xFFA1EEBD),
-  backgroundColor: const Color(0xFFFCFCFC),
-  textColor: Colors.black,
-);
+final class LightMyTheme implements MyTheme {
+  @override
+  final Color mainColor = const Color(0xFF7BD3EA);
 
-final darkTheme = MyTheme(
-  mainColor: const Color(0xFF7BD3EA),
-  containerColor: const Color(0xFF007F73),
-  backgroundColor: const Color(0xFF2C2C2C),
-  textColor: Colors.white,
-);
+  @override
+  final Color containerColor = const Color(0xFFA1EEBD);
+
+  @override
+  final Color backgroundColor = const Color(0xFFFCFCFC);
+
+  @override
+  final Color textColor = Colors.black;
+}
+
+final class DarkMyTheme implements MyTheme {
+  @override
+  final Color mainColor = const Color(0xFF7BD3EA);
+
+  @override
+  final Color containerColor = const Color(0xFF007F73);
+
+  @override
+  final Color backgroundColor = const Color(0xFF2C2C2C);
+
+  @override
+  final Color textColor = Colors.white;
+}

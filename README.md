@@ -10,21 +10,24 @@ The `ColorThemeProvider` package lets you define your own color scheme according
 - Uses the `darkTheme` parameter when the device is in dark mode
 - Properly scoped and accessible within the widget tree
 
-![image caption](screenshots/example-screenshot.png)
+[![image caption](screenshots/example-screenshot.png)](https://github.com/themobilecoder/color-theme-provider/raw/master/screenshots/example-screenshot.png)
 
 ## Usage
 
 ### Import it
 
-Add the package to your `pubspec.yaml`
+Use pub add in your project:
+
+```
+flutter pub add color_theme_provider
+```
+
+Or manually add the package to your `pubspec.yaml`
 
 ```yaml
 dependencies:
   
-  color_theme_provider:
-    git:
-      url: https://github.com/themobilecoder/color-theme-provider
-      ref: 1.1.0
+  color_theme_provider: 1.1.0
 ```
 
 

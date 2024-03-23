@@ -27,7 +27,7 @@ Or manually add the package to your `pubspec.yaml`
 ```yaml
 dependencies:
   
-  color_theme_provider: 1.1.0
+  color_theme_provider: 1.1.1
 ```
 
 
